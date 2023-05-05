@@ -2,5 +2,8 @@
   <header>
     <h1>Todo List</h1>
   </header>
-  <app-todos />
+  <app-item-output (addNewItemEvent)="onAddNewItem($event)"></app-item-output>
+  <ul *ngFor="let item of items">
+    <li>{{item}}</li>
+  </ul>
 </div>

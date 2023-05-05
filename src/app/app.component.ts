@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-todo';
+  items = ["Television", "PC", "Laptop", "Xbox"]
+
+  onAddNewItem = (item: string) => {
+    this.items.push(item)
+  }
 }
