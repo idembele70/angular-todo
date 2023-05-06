@@ -6,8 +6,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./item-output.component.scss']
 })
 export class ItemOutputComponent {
-  @Output() addNewItemEvent = new EventEmitter<string>()
-  addNewItem = (item: string) => {
-    this.addNewItemEvent.emit(item)
+  @Output() itemEmitter = new EventEmitter<string>()
+  handleAddItem = (item: string) => {
+    this.itemEmitter.emit(item)
   }
 }

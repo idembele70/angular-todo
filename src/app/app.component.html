@@ -2,8 +2,6 @@
   <header>
     <h1>Todo List</h1>
   </header>
-  <app-item-output (addNewItemEvent)="onAddNewItem($event)"></app-item-output>
-  <ul *ngFor="let item of items">
-    <li>{{item}}</li>
-  </ul>
+  <app-item-output (itemEmitter)="onAddItem($event)"></app-item-output>
+  <app-item-container [items]="items"></app-item-container>
 </div>
