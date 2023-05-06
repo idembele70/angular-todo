@@ -3,5 +3,5 @@
     <h1>Todo List</h1>
   </header>
   <app-item-output (itemEmitter)="onAddItem($event)"></app-item-output>
-  <app-item-container [items]="items"></app-item-container>
+  <app-item-container (itemNameEmitter)="onDeleteItem($event)" [items]="items"></app-item-container>
 </div>

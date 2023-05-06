@@ -1,14 +1,15 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-item-container',
   templateUrl: './item-container.component.html',
   styleUrls: ['./item-container.component.scss']
 })
-export class ItemContainerComponent implements OnChanges {
+export class ItemContainerComponent {
   @Input() items: string[] = []
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes")
+  @Output() itemNameEmitter = new EventEmitter<string>()
+  handleDelete = (itemName: string) => {
+    this.itemNameEmitter.emit(itemName)
   }
+
 }

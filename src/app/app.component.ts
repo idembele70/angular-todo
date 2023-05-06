@@ -5,12 +5,15 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnChanges {
+export class AppComponent {
   items = ["Television", "PC", "Laptop", "Xbox"]
   onAddItem = (item: string) => {
     this.items.push(item)
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+  onDeleteItem = (itemName: string) => {
+    const newItem = this.items.filter(
+      item => item !== itemName
+    )
+    this.items = newItem
   }
 }
