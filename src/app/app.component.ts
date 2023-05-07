@@ -1,4 +1,5 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { ITodo } from './models';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +7,39 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  items = ["Television", "PC", "Laptop", "Xbox"]
-  onAddItem = (item: string) => {
-    this.items.push(item)
+  todos: ITodo[]
+  constructor() {
+    this.todos = [{
+      id: 0,
+      text: "First Todo",
+      completed: false
+    }]
   }
-  onDeleteItem = (itemName: string) => {
-    const newItem = this.items.filter(
-      item => item !== itemName
+  onAddTodo(todo: ITodo) {
+    this.todos.push(todo)
+  }
+  onDeleteTodo(id: number) {
+    const newTodos = this.todos.filter(
+      todo => todo.id !== id
     )
-    this.items = newItem
+    this.todos = newTodos
   }
+  onCompleteTodo(id: number) {
+    const newTodos = this.todos.map(
+      todo => {
+        if (todo.id === id) {
+          return ({
+            ...todo, completed: !todo.completed
+          })
+        } else
+          return todo
+      }
+    )
+    this.todos = newTodos
+  }
+  onDeleteAllTodo() {
+    this.todos = []
+  }
+
+
 }

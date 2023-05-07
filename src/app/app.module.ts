@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ItemOutputComponent } from './components/item-output/item-output.component';
-import { ItemContainerComponent } from './item-container/item-container.component';
+import { InputContainerComponent } from './components/input-container/input-container.component';
+import { TodosListComponent } from './components/todos-list/todos-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemOutputComponent,
-    ItemContainerComponent,
+    InputContainerComponent,
+    TodosListComponent,
   ],
   imports: [
     BrowserModule,

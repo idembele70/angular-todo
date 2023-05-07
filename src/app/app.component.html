@@ -2,6 +2,7 @@
   <header>
     <h1>Todo List</h1>
   </header>
-  <app-item-output (itemEmitter)="onAddItem($event)"></app-item-output>
-  <app-item-container (itemNameEmitter)="onDeleteItem($event)" [items]="items"></app-item-container>
+  <app-input-container [todos]="todos" (addTodoEmitter)="onAddTodo($event)"></app-input-container>
+  <app-todos-list (deleteAllTodosEmitter)="onDeleteAllTodo()" (completeTodoEmitter)="onCompleteTodo($event)"
+    (deleteTodoEmitter)="onDeleteTodo($event)" [todos]="todos"></app-todos-list>
 </div>
