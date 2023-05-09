@@ -3,6 +3,6 @@
     <h1>Todo List</h1>
   </header>
   <app-input-container [todos]="todos" (addTodoEmitter)="onAddTodo($event)"></app-input-container>
-  <app-todos-list (deleteAllTodosEmitter)="onDeleteAllTodo()" (completeTodoEmitter)="onCompleteTodo($event)"
+  <app-todos-list (deleteCompletedTodosEmitter)="onDeleteCompletedTodo()" (completeTodoEmitter)="onCompleteTodo($event)"
     (deleteTodoEmitter)="onDeleteTodo($event)" [todos]="todos"></app-todos-list>
 </div>

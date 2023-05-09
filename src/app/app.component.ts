@@ -37,8 +37,11 @@ export class AppComponent {
     )
     this.todos = newTodos
   }
-  onDeleteAllTodo() {
-    this.todos = []
+  onDeleteCompletedTodo() {
+    const filteredTodos = this.todos.filter(
+      todo => !todo.completed
+    )
+    this.todos = filteredTodos
   }
 
 

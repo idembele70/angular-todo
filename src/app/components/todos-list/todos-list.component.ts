@@ -10,12 +10,12 @@ export class TodosListComponent {
   @Input() todos: ITodo[] = []
   @Output() deleteTodoEmitter = new EventEmitter<number>()
   @Output() completeTodoEmitter = new EventEmitter<number>()
-  @Output() deleteAllTodosEmitter = new EventEmitter()
+  @Output() deleteCompletedTodosEmitter = new EventEmitter()
   deleteTodo = (id: number) => {
     this.deleteTodoEmitter.emit(id)
   }
-  deleteAllTodo = () => {
-    this.deleteAllTodosEmitter.emit()
+  deleteCompletedTodos = () => {
+    this.deleteCompletedTodosEmitter.emit()
   }
   toggleCompleted = (id: number) => {
     this.completeTodoEmitter.emit(id)
