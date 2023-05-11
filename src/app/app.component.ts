@@ -9,11 +9,7 @@ import { ITodo } from './models';
 export class AppComponent {
   todos: ITodo[]
   constructor() {
-    this.todos = [{
-      id: 0,
-      text: "First Todo",
-      completed: false
-    }]
+    this.todos = []
   }
   onAddTodo(todo: ITodo) {
     this.todos.push(todo)
