@@ -1,6 +1,6 @@
 <div class="todo-container">
-  <ul class="todo-wrapper" *ngFor="let todo of todos;">
-    <li class="todo-item">
+  <ul class="todo-wrapper">
+    <li class="todo-item" *ngFor="let todo of todos;">
       <div class="btn-container">
         <div (click)="toggleCompleted(todo.id)" class="checkbox-container" [ngClass]="todo.completed ? 'checked' :''">
         </div>
