@@ -11,21 +11,12 @@ const todos: string[] = [
 
 test.describe("new Todo", () => {
   test("should add one todo", async ({ page }) => {
-    // first todo
     const inputField = page.locator(".add-todo-input")
     const submitBtn = page.locator(".add-todo-btn")
     const todoText = page.locator(".todo-text")
     await inputField.fill(todos[0])
     await submitBtn.click()
     await expect(todoText).toHaveText(todos[0])
-    // second todo
-    await inputField.fill(todos[1])
-    await inputField.press("Enter")
-    // check if the todos exists
-    await expect(todoText).toHaveText([
-      todos[0],
-      todos[1],
-    ])
   })
   test("should add mutiple todos", async ({ page }) => {
     await addTodos(page)
@@ -77,7 +68,7 @@ test.describe("check todo", () => {
   test("check mutiple todos", async ({ page }) => {
     const checkboxBtn = page.locator(".checkbox-container")
     await addTodos(page)
-    await toggleCheckTodos(page, checkboxBtn)
+    await toggleCheckTodos(checkboxBtn)
     const completedtodos = page.locator(".todo-text.completed")
     const completedTodosCount = await completedtodos.count()
     expect(completedTodosCount).toEqual(todos.length)
@@ -102,12 +93,12 @@ test.describe("check todo", () => {
     const checkboxBtn = page.locator(".checkbox-container")
     await addTodos(page)
     // uncheck the todos
-    await toggleCheckTodos(page, checkboxBtn)
+    await toggleCheckTodos(checkboxBtn)
     const completedtodos = page.locator(".todo-text.completed")
     const completedTodosCount = await completedtodos.count()
     expect(completedTodosCount).toEqual(todos.length)
     // check the todos
-    await toggleCheckTodos(page, checkboxBtn)
+    await toggleCheckTodos(checkboxBtn)
     const unCompletedTodosCount = await completedtodos.count()
     expect(unCompletedTodosCount).toEqual(0)
   })
@@ -126,7 +117,7 @@ test.describe("check todo", () => {
   test("clear multiple completed todo", async ({ page }) => {
     await addTodos(page)
     const checkboxBtn = page.locator(".checkbox-container")
-    await toggleCheckTodos(page, checkboxBtn)
+    await toggleCheckTodos(checkboxBtn)
     const todosCompleted = page.locator(".todo-text.completed")
     const completedCountBeforeClear = await todosCompleted.count()
     expect(completedCountBeforeClear).toEqual(3)
@@ -134,6 +125,29 @@ test.describe("check todo", () => {
     await clearCompletedBtn.click()
     const completedCountAfterClear = await todosCompleted.count()
     expect(completedCountAfterClear).toEqual(0)
+  })
+})
+test.describe("delete todo", () => {
+  test("should delete one todo", async ({ page }) => {
+    const inputField = page.locator(".add-todo-input")
+    const submitBtn = page.locator(".add-todo-btn")
+    const todoText = page.locator(".todo-text")
+    await inputField.fill(todos[0])
+    await submitBtn.click()
+    await expect(todoText).toHaveText(todos[0])
+    const deleteBtn = page.locator(".delete-btn")
+    await deleteBtn.click()
+    expect(await todoText.count()).toEqual(0)
+  })
+  test("should delete mutiple todo", async ({ page }) => {
+    await addTodos(page)
+    const todoItems = page.locator(".todo-item")
+    const todosCountBeforeDelete = await todoItems.count()
+    expect(todosCountBeforeDelete).toEqual(todos.length)
+    const deleteBtn = page.locator(".delete-btn")
+    await deleteTodos(deleteBtn)
+    const todosCountAfterDelete = await todoItems.count()
+    expect(todosCountAfterDelete).toEqual(0)
   })
 })
 
@@ -147,10 +161,17 @@ async function addTodos(page: Page) {
     await inputField.press("Enter")
   }
 }
-async function toggleCheckTodos(page: Page, checkboxLocator: Locator) {
+async function toggleCheckTodos(checkboxLocator: Locator) {
   const checkboxBtnCount = await checkboxLocator.count()
   for (let index = 0; index < checkboxBtnCount; index++) {
     const currentCheckboxBtn = checkboxLocator.nth(index);
     await currentCheckboxBtn.click()
+  }
+}
+async function deleteTodos(deleteLocator: Locator) {
+  const deleteBtnCount = await deleteLocator.count()
+  for (let index = 0; index < deleteBtnCount; index++) {
+    const currentdeleteBtn = deleteLocator.nth(0);
+    await currentdeleteBtn.click()
   }
 }

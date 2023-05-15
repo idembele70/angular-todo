@@ -1,0 +1,4 @@
+<div class="todo-footer">
+  <h6>{{(todos$ | async)?.length}} Items</h6>
+  <h6 class="btn" (click)="handleDeleteCompletedTodos()">Clear Complete</h6>
+</div>

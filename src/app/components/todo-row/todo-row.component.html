@@ -1,0 +1,12 @@
+<li class="todo-item" *ngFor="let todo of todos$ | async;">
+  <div class="btn-container">
+    <div (click)="handleToggleCompleted(todo.id)" class="checkbox-container" [ngClass]="todo.completed ? 'checked' :''">
+    </div>
+  </div>
+  <h5 class="todo-text" [ngClass]="todo.completed ? 'completed':''">
+    {{todo.text}}
+  </h5>
+  <div (click)="handleDeleteTodo(todo.id)" class="btn-container">
+    <button class="delete-btn">X</button>
+  </div>
+</li>

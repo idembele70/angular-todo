@@ -2,7 +2,6 @@
   <header>
     <h1>Todo List</h1>
   </header>
-  <app-input-container [todos]="todos" (addTodoEmitter)="onAddTodo($event)"></app-input-container>
-  <app-todos-list (deleteCompletedTodosEmitter)="onDeleteCompletedTodo()" (completeTodoEmitter)="onCompleteTodo($event)"
-    (deleteTodoEmitter)="onDeleteTodo($event)" [todos]="todos"></app-todos-list>
+  <app-input-container></app-input-container>
+  <app-todos-list></app-todos-list>
 </div>

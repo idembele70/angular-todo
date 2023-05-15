@@ -1,20 +1,6 @@
 <div class="todo-container">
   <ul class="todo-wrapper">
-    <li class="todo-item" *ngFor="let todo of todos;">
-      <div class="btn-container">
-        <div (click)="toggleCompleted(todo.id)" class="checkbox-container" [ngClass]="todo.completed ? 'checked' :''">
-        </div>
-      </div>
-      <h5 class="todo-text" [ngClass]="todo.completed ? 'completed':''">
-        {{todo.text}}
-      </h5>
-      <div (click)="deleteTodo(todo.id)" class="btn-container">
-        <button class="delete-btn">X</button>
-      </div>
-    </li>
+    <app-todo-row></app-todo-row>
   </ul>
-  <div class="todo-footer">
-    <h6>{{todos.length}} Items</h6>
-    <h6 class="btn" (click)="deleteCompletedTodos()">Clear Complete</h6>
-  </div>
+  <app-todo-footer></app-todo-footer>
 </div>

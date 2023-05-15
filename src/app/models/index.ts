@@ -3,6 +3,10 @@ interface ITodo {
   text: string;
   completed: boolean;
 }
+interface IId {
+  id: number;
+}
 export {
-  ITodo
+  ITodo,
+  IId
 }
