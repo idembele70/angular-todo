@@ -1,8 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
 import { ITodo } from "src/app/models";
 import { addTodo, deleteCompletedTodos, deleteTodo, toggleCompleted } from "../actions/todo.actions";
-
-const initialState: ITodo[] = []
+const localTodos = localStorage.getItem("todos")
+const initialState: ITodo[] = localTodos ? JSON.parse(localTodos) : []
 /*  {
    id: 0,
    text: "todo 1",
