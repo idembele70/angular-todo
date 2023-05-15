@@ -44,13 +44,7 @@ test.describe("new Todo", () => {
       todos[0]
     )
   })
-  test("should count the number of todo", async ({ page }) => {
-    await addTodos(page)
-    const todoText = page.locator(".todo-text")
-    await expect(todoText).toHaveText(todos)
-    const todoCount = page.locator(".todo-footer h6").first()
-    await expect(todoCount).toHaveText(`${todos.length} Items`)
-  })
+
 })
 
 test.describe("check todo", () => {
@@ -150,6 +144,44 @@ test.describe("delete todo", () => {
     expect(todosCountAfterDelete).toEqual(0)
   })
 })
+test.describe("counter", () => {
+  test("should count the number of todo", async ({ page }) => {
+    const inputField = page.locator(".add-todo-input")
+    await inputField.fill(todos[0])
+    await inputField.press("Enter")
+    const todoText = page.locator(".todo-text")
+    await expect(todoText).toHaveText(todos[0])
+    const todoCount = page.locator(".todo-footer h6").first()
+    await expect(todoCount).toHaveText(`1 Items`)
+  })
+  test("should count the number of todos", async ({ page }) => {
+    await addTodos(page)
+    const todoText = page.locator(".todo-text")
+    await expect(todoText).toHaveText(todos)
+    const todoCount = page.locator(".todo-footer h6").first()
+    await expect(todoCount).toHaveText(`${todos.length} Items`)
+  })
+  test("should decrease the count after one todo deleted", async ({ page }) => {
+    await addTodos(page)
+    const todoText = page.locator(".todo-text")
+    await expect(todoText).toHaveText(todos)
+    const todoCount = page.locator(".todo-footer h6").first()
+    await expect(todoCount).toHaveText(`${todos.length} Items`)
+    const deleteBtn = page.locator(".delete-btn")
+    await deleteBtn.nth(0).click()
+    await expect(todoCount).toHaveText(`${todos.length - 1} Items`)
+  })
+  test("should decrease the count after delete completed todos", async ({ page }) => {
+    await addTodos(page)
+    const checkBoxLocator = page.locator(".checkbox-container")
+    await toggleCheckTodos(checkBoxLocator)
+    const todoCount = page.locator(".todo-footer h6").first()
+    await expect(todoCount).toHaveText(`${todos.length} Items`)
+    const clearCompletedBtn = page.locator(".todo-footer .btn")
+    await clearCompletedBtn.click()
+    await expect(todoCount).toHaveText(`0 Items`)
+  })
+})
 
 // functions
 
@@ -170,7 +202,7 @@ async function toggleCheckTodos(checkboxLocator: Locator) {
 }
 async function deleteTodos(deleteLocator: Locator) {
   const deleteBtnCount = await deleteLocator.count()
-  for (let index = 0; index < deleteBtnCount; index++) {
+  for (let index = deleteBtnCount; index > 0; index--) {
     const currentdeleteBtn = deleteLocator.nth(0);
     await currentdeleteBtn.click()
   }
